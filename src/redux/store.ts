@@ -1,12 +1,32 @@
-import { Action, configureStore } from '@reduxjs/toolkit';
-import { legacy_createStore as createStore, applyMiddleware, combineReducers } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
-import * as reducers from './modules';
-const isDevelopment = process.env.NODE_ENV !== 'production' && typeof window === 'object';
+import rootReducer from './reducers';
+import rootSaga from './sagas';
+
+// declare global {
+//   interface Window {
+//     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+//   }
+// }
+
+const hasWindow = typeof window === 'object';
+const isDevelopment = process.env.NODE_ENV !== 'production' && hasWindow;
+
 const sagaMiddleware = createSagaMiddleware();
-const rootReducer = combineReducers(reducers);
-const store = createStore(
-  rootReducer,
-  applyMiddleware(sagaMiddleware)
-);
+
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: false,
+    thunk: false
+  }).concat(sagaMiddleware),
+  devTools: isDevelopment,
+});
+
+sagaMiddleware.run(rootSaga);
+
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
 export default store;

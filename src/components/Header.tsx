@@ -1,21 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
-import ConectWalletContainers from '../containers/ConectWalletContainers';
-// const Header = () => {
-//   return (
-//     <>
-//       <div className='flex'>
-//         <Link href='/'>Home</Link>
-//         <Link href='/about'>About</Link>
-//         <ConectWalletContainers />
-//       </div>
-//     </>
-//   );
-// };
 
 /* This example requires Tailwind CSS v2.0+ */
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
+import ConnectWallet from './ConnectWallet';
 
 const navigation = [
   { name: 'Home', href: '/', current: true },
@@ -67,7 +57,7 @@ export default function Header() {
               <Menu as='div' className='relative ml-3'>
                 <div>
                   <Menu.Button className='flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
-                    <ConectWalletContainers />
+                    <ConnectWallet />
                   </Menu.Button>
                 </div>
               </Menu>
