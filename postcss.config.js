@@ -1,3 +1,5 @@
+const { truncateSync } = require("fs");
+
 module.exports = {
   plugins: {
     "postcss-import": {},
@@ -5,7 +7,7 @@ module.exports = {
     tailwindcss: {},
     autoprefixer: {},
     "postcss-preset-env": {
-      features: { "nesting-rules": false },
+      features: { "nesting-rules": true },
     },
   },
 };

@@ -55,6 +55,15 @@ const nextConfig = (phase) => {
   };
 };
 
+const webpackConfig = (config) => {
+  config.module.rules.push({
+    test: /\.svg$/,
+    use: ['@svgr/webpack'],
+  });
+
+  return config;
+};
+
 module.exports = (phase, { defaultConfig }) => {
   const nextCustomConfig = nextConfig(phase);
 
@@ -62,6 +71,16 @@ module.exports = (phase, { defaultConfig }) => {
     [
       // [withSentryConfig(moduleExports, SentryWebpackPluginOptions)],
     ],
-    nextCustomConfig
+    {
+      ...nextCustomConfig,
+      webpack(config) {
+        config.module.rules.push({
+          test: /\.svg$/i,
+          issuer: /\.[jt]sx?$/,
+          use: ['@svgr/webpack'],
+        });
+        return config;
+      },
+    }
   )(phase, defaultConfig);
 };
