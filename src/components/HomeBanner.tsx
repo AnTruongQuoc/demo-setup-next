@@ -4,7 +4,7 @@ import CustomSlider from './CustomSlider/CustomSlider'
 const HomeBanner = () => {
     return (
         <div style={{ height: '650px' }} className='w-full flex flex-row'>
-            <div className='w-1/2 flex flex-col items-start justify-center h-full'>
+            <div className='w-1/2 flex flex-col items-start justify-center h-full pr-6'>
                 <div className='content pb-3'>
                     <h2 className='font-semibold text-6xl'>Dicover a New <br></br> Era of NFTs</h2>
                     <p className='py-8'>DAO Platform is the primier marketplace for NFT, which are digital items you can truly own. Digital items have existed for a long time, but never like this.</p>

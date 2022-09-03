@@ -20,7 +20,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "paths": {
+      "@assets": ["src/assets"],
+      "@assets/*": ["src/assets/*"]
+    }
   },
   "include": [
     "next-env.d.ts",

@@ -2,12 +2,12 @@ $color-purple: #8B5CF6;
 $color-pink: #EC4899;
 $color-gray: #9CA3AF;
 $color-black: #1F2937;
-$card-size: 23rem;
+$card-size: 278px;
 
 .carousel {
   position: relative;
   width: $card-size;
-  height: $card-size;
+  height: 514px;
   perspective: 500px;
   transform-style: preserve-3d;
 }
@@ -20,17 +20,16 @@ $card-size: 23rem;
     rotateY(calc(var(--offset) * 0deg)) 
     scaleY(calc(1 + var(--abs-offset) * -0.1))
     translateZ(calc(var(--abs-offset) * -2rem))
-    translateX(calc(var(--direction) * -10rem));
+    translateX(calc(var(--direction) * -6rem));
   filter: blur(calc(var(--abs-offset) * .1rem));
   transition: all 0.3s ease-out;
 }
 
 .card {
-  width: 300px;
-  height: 600px;
-  padding: 2rem;
+  width: 278px;
+  height: 514px;
   background-color: hsl(280deg, 40%, calc(100%));
-  border-radius: 1rem;
+  border-radius: 8px;
   color: $color-gray;
   text-align: justify;
   transition: all 0.3s ease-out;
@@ -50,7 +49,7 @@ $card-size: 23rem;
 
 .nav {
   color: white;
-  font-size: 5rem;
+  font-size: 2rem;
   position: absolute;
   display: flex;
   align-items: center;
@@ -59,17 +58,15 @@ $card-size: 23rem;
   z-index: 2;
   cursor: pointer;
   user-select: none;
-  background: unset;
-  border: unset;
   
   &.left {
-    transform: translateX(-200%) translatey(-50%);
+    transform: translateX(-280%) translatey(-50%);
     color: #000;
   }
   
   &.right {
     right: 0;
-    transform: translateX(200%) translatey(-50%);
+    transform: translateX(280%) translatey(-50%);
     color: #000;
   }
 }

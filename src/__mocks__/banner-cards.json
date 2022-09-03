@@ -1,0 +1,56 @@
+[
+    {
+        "countdown": 518400,
+        "vaultImageSrc": "/images/nfts/zorapi00.png",
+        "vaultVerify": true,
+        "isLike": false,
+        "vaultName": "Zime Kotozaku ...",
+        "vaultBSC": "28 API",
+        "collectionName": "Zora Gonpa",
+        "isAuctionLive": true,
+        "vaultCreator": {
+            "name": "SalvadorDali",
+            "avatar": "/images/ava/vault-creator-ava.png"
+        },
+        "currentBid": {
+            "price": 24.89,
+            "chain": "ETH"
+        }
+    },
+    {
+        "countdown": 518400,
+        "vaultImageSrc": "/images/nfts/redheadphone.png",
+        "vaultVerify": true,
+        "isLike": true,
+        "vaultName": "Hamlet Contemplates ...",
+        "vaultBSC": "12 NFTs",
+        "collectionName": "Koro Headphone",
+        "isAuctionLive": true,
+        "vaultCreator": {
+            "name": "SalvadorDali",
+            "avatar": "/images/ava/vault-creator-ava.png"
+        },
+        "currentBid": {
+            "price": 4.89,
+            "chain": "ETH"
+        }
+    },
+    {
+        "countdown": 518400,
+        "vaultImageSrc": "/images/nfts/blue9900.png",
+        "vaultVerify": true,
+        "isLike": false,
+        "vaultName": "Simpa Honalotol ...",
+        "vaultBSC": "19 FUT",
+        "collectionName": "Collection Name",
+        "isAuctionLive": true,
+        "vaultCreator": {
+            "name": "SalvadorDali",
+            "avatar": "/images/ava/vault-creator-ava.png"
+        },
+        "currentBid": {
+            "price": 9.89,
+            "chain": "ETH"
+        }
+    }
+]
