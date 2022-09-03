@@ -119,7 +119,7 @@ export default function Header() {
               {/* Profile dropdown */}
               <Menu as='div' className='relative ml-3'>
                 <div>
-                  <Menu.Button className='flex rounded-full h-10 bg-blue-500 px-4 py-2 dark:bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 flex-row justify-center items-center font-medium'>
+                  <Menu.Button className='flex rounded-full h-10 bg-blue-500 px-4 py-2 dark:bg-blue-500 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 flex-row justify-center items-center font-medium'>
                     <ConnectWallet />
                   </Menu.Button>
                 </div>

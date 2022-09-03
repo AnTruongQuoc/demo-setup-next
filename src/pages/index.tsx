@@ -1,3 +1,4 @@
+import HomeBanner from 'components/HomeBanner';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -14,17 +15,8 @@ const Home: NextPage = () => {
           <link rel='icon' href='/favicon.ico' />
         </Head>
 
-        <main className={styles.main}>
-          <h1 className={styles.title}>
-            Welcome to <a href='https://nextjs.org'>Next.js!</a>
-          </h1>
-
-          <p className={styles.description}>
-            Get started by editing <code className={styles.code}>pages/index.tsx</code>
-          </p>
-
-          <div className={styles.grid}>
-          </div>
+        <main className='flex flex-1 flex-col justify-start items-center h-min'>
+          <HomeBanner />
         </main>
 
         <footer className={styles.footer}>
