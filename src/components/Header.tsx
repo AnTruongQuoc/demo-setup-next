@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-
+import { useRouter } from 'next/router';
 import AppsIcon from 'assets/icons/AppsIcon.svg';
 import Logo from 'assets/icons/logo.svg';
 /* This example requires Tailwind CSS v2.0+ */
@@ -10,22 +10,6 @@ import { SunIcon, MoonIcon, ChevronDownIcon } from '@heroicons/react/24/solid';
 import ConnectWallet from './ConnectWallet';
 import { useTheme } from 'next-themes';
 
-const navigation = [
-  { name: 'Home', href: '/', current: true, children: [] },
-  {
-    name: 'Product',
-    href: '#',
-    current: false,
-    children: [
-      { name: 'Marketplace', href: '/', current: false, children: [] },
-      { name: 'Fractional NFT', href: '/', current: false, children: [] },
-      { name: 'Loans Market', href: '/', current: false, children: [] },
-    ],
-  },
-  { name: 'About Us', href: '/about', current: false, children: [] },
-  { name: 'Contact Us', href: '#', current: false, children: [] },
-];
-
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
@@ -33,7 +17,22 @@ function classNames(...classes: string[]) {
 export default function Header() {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme, systemTheme } = useTheme();
-
+  const router = useRouter();
+  const navigation = [
+    { name: 'Home', href: '/', current: router.pathname === '/', children: [] },
+    {
+      name: 'Product',
+      href: '#',
+      current: router.pathname === '/product',
+      children: [
+        { name: 'Marketplace', href: '/', current: false, children: [] },
+        { name: 'Fractional NFT', href: '/', current: false, children: [] },
+        { name: 'Loans Market', href: '/', current: false, children: [] },
+      ],
+    },
+    { name: 'About Us', href: '/about', current: router.pathname === '/about', children: [] },
+    { name: 'Contact Us', href: '#', current: router.pathname === '/contact', children: [] },
+  ];
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -73,17 +72,20 @@ export default function Header() {
                     <Link key={item.name} href={item.href} aria-current={item.current ? 'page' : undefined}>
                       <div
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-400 hover:bg-gray-700 hover:text-white',
-                          'px-3 py-2 rounded-md text-sm font-medium group relative inline-block cursor-pointer'
+                          item.current ? 'current text-gray-900' : 'text-gray-400',
+                          'font-semibold hover:text-primary px-3 py-2 rounded-md text-sm group relative inline-block cursor-pointer'
                         )}>
                         <div className='flex flex-row justify-center items-center'>
-                          <div className='pr-2'>{item.name}</div>
+                          <div className={classNames(item.children.length > 0 ? 'pr-2' : '')}>{item.name}</div>
                           {item.children.length > 0 && <ChevronDownIcon className='h-4 w-4 flex m-0' />}
                         </div>
+                        {item.current && <div className='border mx-1 rounded-sm border-primary'></div>}
 
                         {item.children.length > 0 && (
                           <div className='absolute hidden group-hover:flex pt-2 -ml-2'>
-                            <div style={{padding: '1px'}} className='rounded-lg text-gray-700 mt-4 dark:bg-gradient-to-b from-orange-400 to-red-900 drop-shadow-lg dark:shadow-dark'>
+                            <div
+                              style={{ padding: '1px' }}
+                              className='rounded-lg text-gray-700 mt-4 dark:bg-gradient-to-b from-orange-400 to-red-900 drop-shadow-lg dark:shadow-dark'>
                               <div className='rounded-lg text-gray-700 py-2 px-3 flex flex-col w-44 bg-white dark:bg-black'>
                                 {item.children?.map((item) => (
                                   <Link key={item.name} href={item.href}>

@@ -3,13 +3,17 @@ module.exports = {
   darkMode: 'class',
   theme: {
     boxShadow: {
-      dark: '0px 4px 16px rgba(174, 112, 65, 0.25)'
+      dark: '0px 4px 16px rgba(174, 112, 65, 0.25)',
     },
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#2879FD',
+      },
+    },
   },
   variants: {
     extend: {
-      boxShadow: ['dark']
+      boxShadow: ['dark'],
     },
   },
   plugins: [],

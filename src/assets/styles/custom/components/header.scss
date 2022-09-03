@@ -1,8 +1,15 @@
-
+$color-primary: #2879fd;
 .dark {
-    .header-logo, .header-appicon {
-        path {
-            fill: #fff;
-        }
+  .header-logo,
+  .header-appicon {
+    path {
+      fill: #fff;
     }
+  }
+  .current {
+    color: #fff;
+    :hover {
+      color: $color-primary;
+    }
+  }
 }
