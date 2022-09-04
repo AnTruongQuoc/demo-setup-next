@@ -30,26 +30,27 @@ interface ICardProps {
 
 const Card = (props: ICardProps) => (
   <div className='card flex flex-col drop-shadow-md'>
-    <div className='relative card--header w-full flex flex-row'>
-      <Image src={props.vaultImageSrc} width='278px' height='278px' alt='NFTs vault' />
+    <div className='relative card--header w-full flex flex-row p-3'>
+      <Image src={props.vaultImageSrc} width='254px' height='254px' alt='NFTs vault' className='rounded-lg' />
 
-      <div className='absolute top-0 left-0 w-full flex flex-row justify-between items-center mt-3 px-2'>
-        <div className='bg-white rounded-full h-8 w-fit px-3 flex flex-row justify-center items-center'>
-          <FireIcon className='h-5 w-5' />
-          <span className='text-black ml-1 font-semibold text-sm'>05 : 12 : 07 : 45</span>
-        </div>
-
+      <div className='absolute top-0 left-0 w-full flex flex-row justify-end items-center mt-4 px-4'>
         <div className='flex flex-row justify-center items-center'>
           <div className='bg-white rounded-full h-8 w-8 flex flex-row justify-center items-center'>
             <CheckIcon className='h-5 w-5 fill-green-500' />
           </div>
-          <div className='bg-white rounded-full h-8 w-8 ml-3 flex flex-row justify-center items-center'>
+          <div className='bg-white rounded-full h-8 w-8 ml-2 flex flex-row justify-center items-center'>
             <HeartIcon className={classNames('h-5 w-5', props.isLike ? 'fill-red-500' : 'fill-gray-700')} />
           </div>
         </div>
       </div>
+      <div className='absolute bottom-4 left-0 w-full flex flex-row justify-center items-center mt-4 px-4'>
+        <div className='bg-white rounded-full h-8 w-fit px-3 flex flex-row justify-center items-center'>
+          <FireIcon className='h-5 w-5' />
+          <span className='text-black ml-1 font-semibold text-sm'>05 : 12 : 07 : 45</span>
+        </div>
+      </div>
     </div>
-    <div className='card--body px-3 py-3 flex flex-1 w-full flex-row justify-start items-center'>
+    <div className='card--body px-3 pb-3 flex flex-1 w-full flex-row justify-start items-center'>
       <div className='content flex flex-col items-start w-full'>
         <span className='text-xl font-bold text-black'>{props.vaultName}</span>
         <div className='flex flex-row items-center mt-2'>

@@ -1,3 +1,4 @@
+import Attraction from 'components/Attraction';
 import HomeBanner from 'components/HomeBanner';
 import type { NextPage } from 'next';
 import Head from 'next/head';
@@ -16,13 +17,11 @@ const Home: NextPage = () => {
 
         <main className='flex flex-1 flex-col justify-start items-center h-min mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
           <HomeBanner />
+          <Attraction />
         </main>
 
         <footer className='flex flex-row justify-center items-center'>
-          <a
-            href='https://www.itsryg.com/'
-            target='_blank'
-            rel='noopener noreferrer'>
+          <a href='https://www.itsryg.com/' target='_blank' rel='noopener noreferrer'>
             Powered by RYG.Labs
           </a>
         </footer>

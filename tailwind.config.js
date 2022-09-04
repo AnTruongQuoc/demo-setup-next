@@ -9,6 +9,13 @@ module.exports = {
       colors: {
         primary: '#2879FD',
       },
+      fontSize: {
+        banner: '4rem',
+      },
+      lineHeight: {
+        banner: '5rem',
+        section: '4rem',
+      },
     },
   },
   variants: {
