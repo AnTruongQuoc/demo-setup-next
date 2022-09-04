@@ -1,4 +1,5 @@
 import Attraction from 'components/Attraction';
+import CreateNFT from 'components/CreateNFT';
 import HomeBanner from 'components/HomeBanner';
 import type { NextPage } from 'next';
 import Head from 'next/head';
@@ -20,10 +21,11 @@ const Home: NextPage = () => {
           <Attraction />
         </main>
 
-        <footer className='flex flex-row justify-center items-center'>
-          <a href='https://www.itsryg.com/' target='_blank' rel='noopener noreferrer'>
-            Powered by RYG.Labs
-          </a>
+        <footer>
+          <div>
+            <CreateNFT />
+          </div>
+
         </footer>
       </div>
     </MainLayout>

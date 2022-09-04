@@ -1,0 +1,62 @@
+$color-green-primary: #40E0D0;
+$color-pink-primary: #C62F94;
+
+.footer-banner {
+    height: 672px;
+    position: relative;
+    overflow: hidden;
+
+    .footer-banner-left {
+        width: 534px;
+        height: 372px;
+        position: absolute;
+        left: -83px;
+        top: 30px;
+        background-color: $color-green-primary;
+        filter: blur(700px);
+    }
+
+    .footer-banner-right {
+        width: 534px;
+        height: 372px;
+        position: absolute;
+        left: 988px;
+        top: 270px;
+        background-color: $color-pink-primary;
+        filter: blur(700px);
+    }
+
+    .own-nft {
+        width: 85%;
+        height: 352px;
+        border-radius: 16px;
+        background: radial-gradient(107.52% 338.92% at -3.25% -5.68%, #0052FF 0%, #FF0080 100%)
+            /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
+        ;
+        backdrop-filter: blur(74px);
+
+        p {
+            font-size: 16px;
+            text-align: center;
+            line-height: 32px;
+            color: #E1E1E3
+        }
+
+        button {
+            background: #FFFFFF;
+            border-radius: 16px;
+            // padding: 16px;
+            width: 239px;
+            height: 64px;
+
+            p {
+                font-size: 16px;
+                background: linear-gradient(90deg, #2879FD 18.32%, #EF374B 105.07%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+        }
+    }
+}
