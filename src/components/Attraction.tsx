@@ -23,9 +23,9 @@ const Attraction = () => {
       </h3>
       <div className='attraction-list flex justify-between mt-14'>
         {attractionList.map((attraction, index) => (
-          <div key={index} className='flex-col justify-center w-96 h-96 rounded-2xl shadow-attraction'>
+          <div key={index} className='flex-col justify-center w-96 h-96 rounded-2xl shadow-attraction dark:bg-zinc-900'>
             <div className='mt-14 flex justify-center'>
-              <div className='flex justify-center items-center rounded-full bg-primary w-20 h-20'>
+              <div className='flex justify-center items-center rounded-full bg-primary dark:bg-red-500 w-20 h-20'>
                 <MonitorIcon className='monitor-icon' />
               </div>
             </div>
