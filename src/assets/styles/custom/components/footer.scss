@@ -1,5 +1,6 @@
 $color-black:#161418;
 $color-gray:#8F8B8C;
+$color-red:#DD1818;
 
 .footer {
     height: 456px;
@@ -32,13 +33,12 @@ $color-gray:#8F8B8C;
     .footer{
         .overlay-footer{
             display:block;
-            background-color: red;
             width: 638px;
             height: 300px;
             position:absolute;
             left: -416px;
             top: 0;
-            background: #DD1818;
+            background: $color-red;
             filter: blur(700px);
         }
        

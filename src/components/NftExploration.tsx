@@ -12,7 +12,7 @@ function CreateNFT() {
                     possible and follow our latest announcements!
                 </p>
                 <button>
-                    <p>Create Now</p>
+                    <p className="font-semibold">Create Now</p>
                 </button>
             </div>
         </div>
