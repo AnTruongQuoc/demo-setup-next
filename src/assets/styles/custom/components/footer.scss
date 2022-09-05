@@ -1,9 +1,11 @@
 $color-black:#161418;
+$color-gray:#8F8B8C;
 
 .footer {
     height: 456px;
     width: 100%;
     background-color: $color-black;
+    position:relative;
     .footer-content {
         width: 85%;
         height: 60%;
@@ -15,15 +17,30 @@ $color-black:#161418;
             max-width: 360px;
             font-size:16px;
             line-height:32px;
-            color: #8F8B8C;
+            color: $color-gray;
         }
        
     }
     a{
-        color: #8F8B8C; 
+        color: $color-gray; 
     }
-    span{
-        color:white
+    .overlay-footer{
+        display:none;
     }
 }
-
+.dark{
+    .footer{
+        .overlay-footer{
+            display:block;
+            background-color: red;
+            width: 638px;
+            height: 300px;
+            position:absolute;
+            left: -416px;
+            top: 0;
+            background: #DD1818;
+            filter: blur(700px);
+        }
+       
+    }
+}

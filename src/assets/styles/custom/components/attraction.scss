@@ -1,0 +1,14 @@
+$color-primary: #2879fd;
+
+.attraction-list div:nth-child(2) {
+  color: white;
+  background-color: $color-primary;
+  .rounded-full {
+    background-color: white;
+    .monitor-icon {
+      path {
+        fill: $color-primary;
+      }
+    }
+  }
+}

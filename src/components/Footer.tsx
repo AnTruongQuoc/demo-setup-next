@@ -46,10 +46,10 @@ function Footer() {
         },
     ];
     return (
-        <div className='flex justify-center items-center h-full w-full footer'>
+        <div className='flex justify-center items-center h-full w-full footer border-none'>
             <div className='h-min mx-auto max-w-7xl footer-content'>
                 <div className='w-full h-full'>
-                    <div></div>
+                    <div className="overlay-footer"></div>
                     <div className='md:flex md:justify-between'>
                         <div className='mb-4 md:mb-0 w-2/5'>
                             <Logo className='block h-auto w-auto dark:text-white footer-logo' />
@@ -60,22 +60,20 @@ function Footer() {
                         </div>
                         <div className='w-3/5 h-full grid grid-cols-3 gap-3'>
                             {footerElements.map((item, idx) => (
-                                <>
-                                    <div key={idx}>
-                                        <h2 className='mb-4 text-2xl font-bold text-white'>{item.title}</h2>
-                                        <ul className='text-gray-600 dark:text-gray-400'>
-                                            {item.list.map((li, index) => (
-                                                <div key={index}>
-                                                    <li className='mt-5' >
-                                                        <a href={li.href} className='hover:underline-none text-base font-normal'>
-                                                            {li.name}
-                                                        </a>
-                                                    </li>
-                                                </div>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                </>
+                                <div key={`${item.title}-${idx}`}>
+                                    <h2 className='mb-4 text-2xl font-bold text-white'>{item.title}</h2>
+                                    <ul className='text-gray-600 dark:text-gray-400'>
+                                        {item.list.map((li, index) => (
+                                            <div key={index}>
+                                                <li className='mt-5'>
+                                                    <a href={li.href} className='hover:underline-none text-base font-normal'>
+                                                        {li.name}
+                                                    </a>
+                                                </li>
+                                            </div>
+                                        ))}
+                                    </ul>
+                                </div>
                             ))}
                             <div>
                                 <h2 className='mb-4 text-2xl font-bold text-white dark:text-white'>Contact</h2>
@@ -102,7 +100,7 @@ function Footer() {
                     </div>
                 </div>
                 <div className='sm:flex sm:items-center sm:justify-between mt-2'>
-                    <span className='text-sm sm:text-center '>2021 All Right Reserved</span>
+                    <span className='text-sm sm:text-center text-white dark:text-white'>2021 All Right Reserved</span>
                 </div>
             </div>
         </div>

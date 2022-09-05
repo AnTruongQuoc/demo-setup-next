@@ -1,4 +1,5 @@
 import React from 'react';
+import MonitorIcon from 'assets/icons/monitor.svg';
 const Attraction = () => {
   const attractionList = [
     {
@@ -15,14 +16,22 @@ const Attraction = () => {
     },
   ];
   return (
-    <div className="flex justify-center w-full">
-      <h3 className='flex-1 font-bold text-5xl leading-section self-center'>
+    <div className='align-center w-full my-20 '>
+      <h3 className='text-center font-bold text-5xl leading-section'>
         Create, Fractionalize <br />
         and Lend your NFTs
       </h3>
-      <div className='flex-row justify-between'>
-        {attractionList.map((attraction) => (
-          <>avc</>
+      <div className='attraction-list flex justify-between mt-14'>
+        {attractionList.map((attraction, index) => (
+          <div key={index} className='flex-col justify-center w-96 h-96 rounded-2xl shadow-attraction'>
+            <div className='mt-14 flex justify-center'>
+              <div className='flex justify-center items-center rounded-full bg-primary w-20 h-20'>
+                <MonitorIcon className='monitor-icon' />
+              </div>
+            </div>
+            <p className='mt-12 font-bold text-2xl text-center'>{attraction.title}</p>
+            <p className='mt-6 mx-8 text-center text-sm font'>{attraction.text}</p>
+          </div>
         ))}
       </div>
     </div>

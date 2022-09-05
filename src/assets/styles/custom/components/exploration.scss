@@ -1,12 +1,13 @@
-$color-green-primary: #40E0D0;
-$color-pink-primary: #C62F94;
+$color-green-primary: #40e0d0;
+$color-pink-primary: #c62f94;
+$color-pink-darkest:#ef374b;
 
-.footer-banner {
+.exploration-section {
     height: 672px;
     position: relative;
     overflow: hidden;
 
-    .footer-banner-left {
+    .exploration-section-left {
         width: 534px;
         height: 372px;
         position: absolute;
@@ -14,9 +15,10 @@ $color-pink-primary: #C62F94;
         top: 30px;
         background-color: $color-green-primary;
         filter: blur(700px);
+        z-index: 999;
     }
 
-    .footer-banner-right {
+    .exploration-section-right {
         width: 534px;
         height: 372px;
         position: absolute;
@@ -24,92 +26,64 @@ $color-pink-primary: #C62F94;
         top: 270px;
         background-color: $color-pink-primary;
         filter: blur(700px);
+        z-index: 999;
     }
 
-    .own-nft {
+    .exploration-nft {
         width: 85%;
         height: 352px;
         border-radius: 16px;
-        background: radial-gradient(107.52% 338.92% at -3.25% -5.68%, #0052FF 0%, #FF0080 100%)
-            /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
-        ;
+        background: radial-gradient(107.52% 338.92% at -3.25% -5.68%, #0052ff 0%, #ff0080 100%);
         backdrop-filter: blur(74px);
 
         p {
             font-size: 16px;
             text-align: center;
             line-height: 32px;
-            color: #E1E1E3
+            color: #e1e1e3;
         }
 
         button {
-            background: #FFFFFF;
+            background: #ffffff;
             border-radius: 16px;
-            // padding: 16px;
             width: 239px;
             height: 64px;
 
             p {
                 font-size: 16px;
-                background: linear-gradient(90deg, #2879FD 18.32%, #EF374B 105.07%);
+                background: linear-gradient(90deg, #2879fd 18.32%, $color-pink-darkest 105.07%);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
                 background-clip: text;
             }
-
         }
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
 }
 
 .dark {
-    .own-nft {
+
+    .exploration-nft {
         width: 85%;
         height: 352px;
         border-radius: 16px;
         background: none;
         position: relative;
-        /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
-        ;
-        // border: 1px solid;
-        // border-image-slice: 1;
-        // border-width: 1px;
-        // border-color:red;
-        // border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
-        // border-radius: 16px;
-        // background-clip: padding-box;
-        :before{
-            content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 16px; 
-  padding: 1px; 
-  background:linear-gradient(45deg,red,blue); 
-  -webkit-mask: 
-     linear-gradient(#fff 0 0) content-box, 
-     linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude; 
+
+        :before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            padding: 1px;
+            background: linear-gradient(100deg, #FF3039, #C62F94);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
         }
-       
-                
 
         button {
-            background: #EF374B;
+            background: $color-pink-darkest;
             border-radius: 16px;
-            // padding: 16px;
             width: 239px;
             height: 64px;
 
@@ -119,11 +93,9 @@ $color-pink-primary: #C62F94;
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: white;
                 background-clip: text;
-                color: whitesmoke
+                color: whitesmoke;
             }
-
         }
     }
-
 
 }
