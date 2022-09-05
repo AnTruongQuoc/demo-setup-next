@@ -15,7 +15,6 @@ $color-pink-darkest:#ef374b;
         top: 30px;
         background-color: $color-green-primary;
         filter: blur(700px);
-        z-index: 999;
     }
 
     .exploration-section-right {
@@ -26,7 +25,7 @@ $color-pink-darkest:#ef374b;
         top: 270px;
         background-color: $color-pink-primary;
         filter: blur(700px);
-        z-index: 999;
+        z-index: 10
     }
 
     .exploration-nft {
@@ -61,6 +60,13 @@ $color-pink-darkest:#ef374b;
 }
 
 .dark {
+    .exploration-section-right {
+        z-index: 10
+    }
+    .exploration-section-left{
+        z-index:-1;
+    }
+
     .exploration-nft {
         width: 85%;
         height: 352px;
@@ -75,7 +81,7 @@ $color-pink-darkest:#ef374b;
             border-radius: 16px;
             padding: 1px;
             background: linear-gradient(100deg, #FF3039, #C62F94);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
         }
@@ -95,5 +101,11 @@ $color-pink-darkest:#ef374b;
                 color: whitesmoke;
             }
         }
+    }
+}
+
+.dark {
+    .exploration-section {
+        overflow: visible
     }
 }

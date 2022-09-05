@@ -1,6 +1,8 @@
 $color-black:#161418;
 $color-gray:#8F8B8C;
 $color-red:#DD1818;
+$color-orange:#FF8C00;
+$color-pink-primary: #c62f94;
 
 .footer {
     height: 456px;
@@ -40,6 +42,9 @@ $color-red:#DD1818;
             top: 0;
             background: $color-red;
             filter: blur(700px);
+        }
+        h2{
+            color:$color-orange
         }
        
     }
