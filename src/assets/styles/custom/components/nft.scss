@@ -58,5 +58,72 @@ $color-pink-primary: #C62F94;
             }
 
         }
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+}
+
+.dark {
+    .own-nft {
+        width: 85%;
+        height: 352px;
+        border-radius: 16px;
+        background: none;
+        position: relative;
+        /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
+        ;
+        // border: 1px solid;
+        // border-image-slice: 1;
+        // border-width: 1px;
+        // border-color:red;
+        // border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+        // border-radius: 16px;
+        // background-clip: padding-box;
+        :before{
+            content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px; 
+  padding: 1px; 
+  background:linear-gradient(45deg,red,blue); 
+  -webkit-mask: 
+     linear-gradient(#fff 0 0) content-box, 
+     linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude; 
+        }
+       
+                
+
+        button {
+            background: #EF374B;
+            border-radius: 16px;
+            // padding: 16px;
+            width: 239px;
+            height: 64px;
+
+            p {
+                font-size: 16px;
+                background: none;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: white;
+                background-clip: text;
+                color: whitesmoke
+            }
+
+        }
+    }
+
+
 }
