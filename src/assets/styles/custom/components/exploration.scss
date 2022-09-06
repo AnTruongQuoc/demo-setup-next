@@ -1,0 +1,106 @@
+$color-green-primary: #40e0d0;
+$color-pink-primary: #c62f94;
+$color-pink-darkest: #ef374b;
+
+.exploration-section {
+  height: 672px;
+  position: relative;
+  overflow: hidden;
+
+  .exploration-section-left {
+    width: 534px;
+    height: 372px;
+    position: absolute;
+    left: -83px;
+    top: 30px;
+    background-color: $color-green-primary;
+    filter: blur(700px);
+  }
+
+  .exploration-section-right {
+    width: 534px;
+    height: 372px;
+    position: absolute;
+    left: 988px;
+    top: 270px;
+    background-color: $color-pink-primary;
+    filter: blur(700px);
+  }
+
+  .exploration-nft {
+    width: 85%;
+    height: 352px;
+    border-radius: 16px;
+    background: radial-gradient(107.52% 338.92% at -3.25% -5.68%, #0052ff 0%, #ff0080 100%);
+    backdrop-filter: blur(74px);
+
+    p {
+      font-size: 16px;
+      text-align: center;
+      line-height: 32px;
+      color: #e1e1e3;
+    }
+
+    button {
+      background: #ffffff;
+      border-radius: 16px;
+      width: 239px;
+      height: 64px;
+
+      p {
+        font-size: 16px;
+        background: linear-gradient(90deg, #2879fd 18.32%, $color-pink-darkest 105.07%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+    }
+  }
+}
+
+.dark {
+  .exploration-section {
+    overflow: hidden;
+    .exploration-section-right {
+      z-index: 100;
+    }
+    .exploration-section-left {
+      z-index: -1;
+    }
+    .exploration-nft {
+      width: 85%;
+      height: 352px;
+      border-radius: 16px;
+      background: none;
+      position: relative;
+
+      :before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 16px;
+        padding: 1px;
+        background: linear-gradient(100deg, #ff3039, #c62f94);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+      }
+
+      button {
+        background: $color-pink-darkest;
+        border-radius: 16px;
+        width: 239px;
+        height: 64px;
+
+        p {
+          font-size: 16px;
+          background: none;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: white;
+          background-clip: text;
+          color: whitesmoke;
+        }
+      }
+    }
+  }
+}

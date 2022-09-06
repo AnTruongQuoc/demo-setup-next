@@ -1,5 +1,6 @@
 import Attraction from 'components/Attraction';
 import FeatureCollections from 'components/FeatureCollections';
+import NFTExploration from 'components/NftExploration';
 import HomeBanner from 'components/HomeBanner';
 import LiveAuctions from 'components/LiveAuctions';
 import type { NextPage } from 'next';
@@ -23,12 +24,7 @@ const Home: NextPage = () => {
           <LiveAuctions/>
           <FeatureCollections/>
         </main>
-
-        <footer className='flex flex-row justify-center items-center'>
-          <a href='https://www.itsryg.com/' target='_blank' rel='noopener noreferrer'>
-            Powered by RYG.Labs
-          </a>
-        </footer>
+        <NFTExploration />
       </div>
     </MainLayout>
   );

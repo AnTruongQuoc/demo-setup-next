@@ -1,6 +1,6 @@
 import React from 'react';
-import mockLiveAuction from '../__mocks__/live-autions-cards.json';
-import NFTCard from './Card/NFTCard';
+import mockLiveAuction from '../__mocks__/feature-collections-card.json';
+import CollectionCard from './Card/CollectionCard';
 const FeatureCollections = () => {
   return (
     <>
@@ -12,7 +12,7 @@ const FeatureCollections = () => {
       </div>
       <div className='flex justify-between w-full mt-14'>
         {mockLiveAuction.map((item, i: number) => (
-          <NFTCard key={i} {...item} />
+          <CollectionCard key={i} {...item} />
         ))}
       </div>
     </>
