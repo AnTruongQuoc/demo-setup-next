@@ -1,0 +1,30 @@
+[
+  {
+    "collectionName": "CryptoPunks",
+    "collectionAvatar": "/images/collection/punks-avatar.png",
+    "collectionCover": "/images/collection/punks-cover.png",
+    "vaults": 23,
+    "totalPrice": 818123
+  },
+  {
+    "collectionName": "Doodles",
+    "collectionAvatar": "/images/collection/doodles-avatar.png",
+    "collectionCover": "/images/collection/doodles-cover.png",
+    "vaults": 32,
+    "totalPrice": 1265034
+  },
+  {
+    "collectionName": "Bored Ape Yacht",
+    "collectionAvatar": "/images/collection/ape-avatar.png",
+    "collectionCover": "/images/collection/ape-cover.png",
+    "vaults": 19,
+    "totalPrice": 239032
+  },
+  {
+    "collectionName": "Capsule House",
+    "collectionAvatar": "/images/collection/capsule-avatar.jpeg",
+    "collectionCover": "/images/collection/capsule-cover.png",
+    "vaults": 32,
+    "totalPrice": 907612
+  }
+]
