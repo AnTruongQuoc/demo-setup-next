@@ -1,4 +1,5 @@
 import Attraction from 'components/Attraction';
+import FeatureCollections from 'components/FeatureCollections';
 import HomeBanner from 'components/HomeBanner';
 import LiveAuctions from 'components/LiveAuctions';
 import type { NextPage } from 'next';
@@ -20,6 +21,7 @@ const Home: NextPage = () => {
           <HomeBanner />
           <Attraction />
           <LiveAuctions/>
+          <FeatureCollections/>
         </main>
 
         <footer className='flex flex-row justify-center items-center'>
