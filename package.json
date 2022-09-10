@@ -32,7 +32,9 @@
     "prettier": "^2.6.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-owl-carousel": "^2.3.3",
     "react-redux": "^7.2.8",
+    "react-transition-group": "^4.4.5",
     "redux": "^4.2.0",
     "redux-saga": "^1.2.1",
     "sass": "^1.54.6",
@@ -40,6 +42,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.184",
+    "@types/react-transition-group": "^4.4.5",
     "autoprefixer": "^10.4.8",
     "eslint": "7.32.0",
     "eslint-config-next": "12.2.5",

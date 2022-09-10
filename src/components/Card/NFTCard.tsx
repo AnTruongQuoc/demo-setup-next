@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image'
+import Image from 'next/image';
 import { classNames } from 'utils/classname';
 import { CheckIcon, HeartIcon } from '@heroicons/react/24/solid';
 import FireIcon from 'assets/icons/fire.svg';
@@ -20,10 +20,11 @@ interface ICardProps {
     chain: string;
   };
   vaultVerify: boolean;
+  pos?: string;
 }
 
 const NFTCard = (props: ICardProps) => (
-  <div className='card flex flex-col drop-shadow-md'>
+  <div className={`${!!props?.pos && 'item level' + props?.pos} card flex flex-col drop-shadow-md`} id={`${!!props?.pos && 'level' + props?.pos}`}>
     <div className='relative card--header w-full flex flex-row p-3'>
       <Image src={props.vaultImageSrc} width='254px' height='254px' alt='NFTs vault' className='rounded-lg' />
 
