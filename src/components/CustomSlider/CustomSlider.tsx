@@ -16,9 +16,9 @@ const CustomSlider = () => {
   return (
     <div className='ryg-carousel h-fit w-full flex flex-row items-center justify-center'>
       <Carousel MAX_VISIBILITY={MAX_VISIBILITY}>
-        {mockData.map((data, i) => (
+        {/* {mockData.map((data, i) => (
           <NFTCard key={i} {...data} />
-        ))}
+        ))} */}
       </Carousel>
     </div>
   );
