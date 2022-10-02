@@ -16,7 +16,7 @@ const Attraction = () => {
     },
   ];
   return (
-    <div className='align-center w-full my-20 '>
+    <div className='align-center w-full my-10 xs:my-20 '>
       <h3 className='text-center font-bold sm:text-5xl sm:leading-section text-3xl leading-7'>
         Create, Fractionalize <br />
         and Lend your NFTs

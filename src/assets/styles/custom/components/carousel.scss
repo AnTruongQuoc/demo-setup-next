@@ -68,3 +68,38 @@ $card-size: 278px;
     color: #000;
   }
 }
+.item {
+  position: absolute;
+  transition: all 0.3s ease-in-out;
+}
+
+.level0 {
+  box-shadow: -0.2em 0.2em 0.4em #212121;
+  transform: scale(0.8);
+  left: 30%;
+}
+
+.level1 {
+  box-shadow: 0 0.4em 0.8em #212121;
+  left: 0;
+}
+
+.level2 {
+  box-shadow: 0.2em 0.2em 0.4em #212121;
+  transform: scale(0.8);
+  left: -30%;
+}
+
+.level2 {
+  z-index: 1;
+  opacity: 0.3;
+}
+
+.level1 {
+  z-index: 2;
+}
+
+.level0 {
+  opacity: 0.3;
+  z-index: 0;
+}
