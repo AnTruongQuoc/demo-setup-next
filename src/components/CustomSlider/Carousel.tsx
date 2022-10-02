@@ -2,9 +2,6 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 import NFTCard from 'components/Card/NFTCard';
 import React, { ReactNode, useState } from 'react';
 import mockData from '__mocks__/banner-cards.json';
-import { CSSTransition, Transition, TransitionGroup } from 'react-transition-group';
-import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
-
 interface ICarouselProps {
   children?: ReactNode;
   MAX_VISIBILITY: number;
