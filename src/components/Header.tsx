@@ -32,6 +32,7 @@ export default function Header() {
     },
     { name: 'About Us', href: '/about', current: router.pathname === '/about', children: [] },
     { name: 'Contact Us', href: '#', current: router.pathname === '/contact', children: [] },
+    { name: 'Vault Detail', href: '/vaults', current: router.pathname === '/vaults', children: [] },
   ];
   useEffect(() => {
     setMounted(true);
