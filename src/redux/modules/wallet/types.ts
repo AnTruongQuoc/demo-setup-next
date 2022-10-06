@@ -4,7 +4,7 @@ export enum WalletActionTypes {
 
 export interface ConnectWalletAction {
   type: WalletActionTypes.CONNECT_WALLET;
-  payload: { publicKey?: string };
+  payload: { walletAddress?: string };
 }
 
 export type ActionType = ConnectWalletAction;

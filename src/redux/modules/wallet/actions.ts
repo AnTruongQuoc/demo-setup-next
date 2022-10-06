@@ -1,6 +1,6 @@
 import { ActionType, WalletActionTypes } from './types';
 
-export const connectWallet = (publicKey?: string): ActionType => ({
+export const connectWallet = (walletAddress?: string): ActionType => ({
   type: WalletActionTypes.CONNECT_WALLET,
-  payload: { publicKey },
+  payload: { walletAddress },
 });

@@ -2,11 +2,11 @@ import { Reducer } from 'react';
 import { ActionType, WalletActionTypes } from './types';
 
 export interface WalletState {
-  publicKey?: string;
+  walletAddress?: string;
 }
 
 const initialState: WalletState = {
-  publicKey: '',
+  walletAddress: '',
 };
 
 const wallet: Reducer<WalletState, ActionType> = (state: WalletState = initialState, action: ActionType) => {
@@ -14,7 +14,7 @@ const wallet: Reducer<WalletState, ActionType> = (state: WalletState = initialSt
     case WalletActionTypes.CONNECT_WALLET:
       return {
         ...state,
-        publicKey: action.payload.publicKey,
+        walletAddress: action.payload.walletAddress,
       };
     default:
       return state;
