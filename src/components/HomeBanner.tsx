@@ -58,6 +58,13 @@ const HomeBanner = () => {
       status: 'todo',
       log: null,
     },
+    {
+      step: 7,
+      title:
+        'Check wallet for NFT & ERC20 token',
+      status: 'todo',
+      log: null,
+    },
   ]);
 
   // Choose 1 of 3
@@ -114,7 +121,7 @@ const HomeBanner = () => {
         console.log('Deployed NFT Contract Transaction Hash :', receipt.transactionHash);
         console.log('Deployed NFT Contract Address : ', receipt.contractAddress);
         NFT_CONTRACT_ADDRESS = receipt.contractAddress;
-        progress[0].log = `Deployed NFT Contract Transaction Hash : , ${receipt.transactionHash} \n Deployed NFT Contract Address : ${receipt.contractAddress}`;
+        progress[0].log = `Deployed NFT Contract Transaction Hash : ${receipt.transactionHash} \n Deployed NFT Contract Address : ${receipt.contractAddress}`;
         progress[0].status = 'done';
         progress[1].status = 'active';
       });
@@ -132,7 +139,7 @@ const HomeBanner = () => {
       .send(parameter)
       .on('receipt', (receipt) => {
         console.log('Mint Transaction Hash :', receipt.transactionHash);
-        progress[1].log = `Mint Transaction Hash :', ${receipt.transactionHash}`;
+        progress[1].log = `Mint Transaction Hash : ${receipt.transactionHash}`;
         progress[1].status = 'done';
         progress[2].status = 'active';
       });
@@ -148,7 +155,7 @@ const HomeBanner = () => {
         console.log('Deployed Settings Contract Address : ', receipt.contractAddress);
         SETTINGS_CONTRACT_ADDRESS = receipt.contractAddress;
 
-        progress[2].log = `Deployed Settings Contract Transaction Hash :', ${receipt.transactionHash} \n Deployed Settings Contract Address : ${receipt.contractAddress}`;
+        progress[2].log = `Deployed Settings Contract Transaction Hash : ${receipt.transactionHash} \n Deployed Settings Contract Address : ${receipt.contractAddress}`;
         progress[2].status = 'done';
         progress[3].status = 'active';
       });
@@ -168,7 +175,7 @@ const HomeBanner = () => {
         console.log('Deployed Vault Factory Contract Address : ', receipt.contractAddress);
         VAULT_FACTORY_CONTRACT_ADDRESS = receipt.contractAddress;
 
-        progress[3].log = `Deployed Vault Factory Contract Transaction Hash :', ${receipt.transactionHash} \n Deployed Vault Factory Contract Address : ${receipt.contractAddress}`;
+        progress[3].log = `Deployed Vault Factory Contract Transaction Hash : ${receipt.transactionHash} \n Deployed Vault Factory Contract Address : ${receipt.contractAddress}`;
         progress[3].status = 'done';
         progress[4].status = 'active';
       });
@@ -184,7 +191,7 @@ const HomeBanner = () => {
       .on('receipt', (receipt) => {
         console.log('Approve Transaction Hash :', receipt.transactionHash);
 
-        progress[4].log = `Approve Transaction Hash :', ${receipt.transactionHash}`;
+        progress[4].log = `Approve Transaction Hash : ${receipt.transactionHash}`;
         progress[4].status = 'done';
         progress[5].status = 'active';
       });
@@ -212,21 +219,29 @@ const HomeBanner = () => {
         console.log('VAULT_FACTORY_CONTRACT_ADDRESS', VAULT_FACTORY_CONTRACT_ADDRESS);
         console.log('VAULT_CONTRACT_ADDRESS', VAULT_CONTRACT_ADDRESS);
 
-        progress[5].log = `NFT_CONTRACT_ADDRESS :', ${NFT_CONTRACT_ADDRESS}
-        \n SETTINGS_CONTRACT_ADDRESS :', ${SETTINGS_CONTRACT_ADDRESS}
-        \n VAULT_FACTORY_CONTRACT_ADDRESS :', ${VAULT_FACTORY_CONTRACT_ADDRESS}
-        \n VAULT_CONTRACT_ADDRESS :', ${VAULT_CONTRACT_ADDRESS}`;
+        progress[5].log = `NFT_CONTRACT_ADDRESS : ${NFT_CONTRACT_ADDRESS}
+        \n SETTINGS_CONTRACT_ADDRESS : ${SETTINGS_CONTRACT_ADDRESS}
+        \n VAULT_FACTORY_CONTRACT_ADDRESS : ${VAULT_FACTORY_CONTRACT_ADDRESS}
+        \n VAULT_CONTRACT_ADDRESS : ${VAULT_CONTRACT_ADDRESS}`;
         progress[5].status = 'done';
+        progress[6].status = 'active';
       });
     setCreateVaultProgress(cloneDeep(progress));
     // // 7. Check wallet for NFT & ERC20 token
     nft_contract = new web3.eth.Contract(erc721Abi, NFT_CONTRACT_ADDRESS);
     vault_contract = new web3.eth.Contract(vaultAbi, VAULT_CONTRACT_ADDRESS);
-    console.log('NFT token balance of wallet: ', await nft_contract.methods.balanceOf(web3.eth.defaultAccount).call());
+
+    const nft_token_wallet_balance = await nft_contract.methods.balanceOf(web3.eth.defaultAccount).call();
+    const erc20_fraction_token_wallet_balance = await vault_contract.methods.balanceOf(web3.eth.defaultAccount).call();
+    console.log('NFT token balance of wallet: ', nft_token_wallet_balance);
     console.log(
       'ERC20 Fractions token balance of wallet: ',
-      await vault_contract.methods.balanceOf(web3.eth.defaultAccount).call()
+      erc20_fraction_token_wallet_balance
     );
+    progress[6].log = `NFT token balance of wallet: ${nft_token_wallet_balance}
+    \n ERC20 Fractions token balance of wallet: ${erc20_fraction_token_wallet_balance}`
+    progress[6].status = 'done';
+    setCreateVaultProgress(cloneDeep(progress));
   };
 
   const handleStartCreatVault = () => {
@@ -292,7 +307,7 @@ const HomeBanner = () => {
                 leave='ease-in duration-200'
                 leaveFrom='opacity-100 scale-100'
                 leaveTo='opacity-0 scale-95'>
-                <Dialog.Panel className='w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                <Dialog.Panel className='w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
                   <Dialog.Title as='h3' className='text-3xl font-bold leading-6 text-gray-900'>
                     Demo Create NFT and Vault
                   </Dialog.Title>
@@ -304,9 +319,10 @@ const HomeBanner = () => {
 
                   <div className='my-8'>
                     {createVaultProgress.map((progress, i) => (
-                      <div key={i} className={`bo-step-${progress.status}`}>
+                      <div key={i} className={`bo-step-${progress.status} flex flex-col`}>
+                        <span className='spinner-grow'></span>
                         <span>{`STEP ${progress.step}: ${progress.title}`}</span>
-                        <span className='text-sm'>{progress.log}</span>
+                        <span className='text-xs'>{progress.log}</span>
                       </div>
                     ))}
                   </div>
