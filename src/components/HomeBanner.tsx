@@ -1,8 +1,11 @@
 // @ts-nocheck
-import React, { useEffect, useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import ConnectWallet from './ConnectWallet';
 import useRedux from 'hooks/useRedux';
 import CustomSlider from './CustomSlider/CustomSlider';
+import { Dialog, Transition } from '@headlessui/react';
+import { cloneDeep } from 'lodash';
+
 import { erc721Abi } from '../../blockchain/abi/erc721Abi';
 import { erc721Bytecode } from '../../blockchain/bytecode/erc721Bytecode';
 import { settingsAbi } from '../../blockchain/abi/settingsAbi';
@@ -11,10 +14,51 @@ import { vaultFactoryAbi } from '../../blockchain/abi/vaultFactoryAbi';
 import { vaultFactoryBytecode } from '../../blockchain/bytecode/vaultFactoryBytecode';
 import { vaultAbi } from '../../blockchain/abi/vaultAbi';
 import Web3 from 'web3';
+
 const HomeBanner = () => {
-  const { dispatch, appSelector } = useRedux();
+  const { appSelector } = useRedux();
 
   const { walletAddress } = appSelector((state) => state.wallet);
+  const [openCreateVaultModal, setOpenCreateVaultModal] = useState<boolean>(false);
+  const [createVaultProgress, setCreateVaultProgress] = useState([
+    {
+      step: 1,
+      title: 'Deploy NFT contract',
+      status: 'active',
+      log: null,
+    },
+    {
+      step: 2,
+      title: 'Mint 01 NFT to your wallet',
+      status: 'todo',
+      log: null,
+    },
+    {
+      step: 3,
+      title: 'Deploy Setting Contract',
+      status: 'todo',
+      log: null,
+    },
+    {
+      step: 4,
+      title: 'Deploy Vault Factory Contract',
+      status: 'todo',
+      log: null,
+    },
+    {
+      step: 5,
+      title: 'Approve for Vault Factory Contract to use your NFTs',
+      status: 'todo',
+      log: null,
+    },
+    {
+      step: 6,
+      title:
+        'Fraction your approved NFT via mint() function of Vault Factory. Vault Factory will transfer your NFT to new minted Vault, then that VaultFactory will mint ERC20 tokens (NFT fractions) to your wallet',
+      status: 'todo',
+      log: null,
+    },
+  ]);
 
   // Choose 1 of 3
   // 1. Localhost
@@ -37,19 +81,19 @@ const HomeBanner = () => {
     gasPrice: web3?.utils?.toWei('1', 'gwei'),
   };
   // Init contract address
-  var NFT_CONTRACT_ADDRESS: any;
-  var SETTINGS_CONTRACT_ADDRESS: any;
-  var VAULT_FACTORY_CONTRACT_ADDRESS: any;
-  var VAULT_CONTRACT_ADDRESS: any;
+  let NFT_CONTRACT_ADDRESS: any;
+  let SETTINGS_CONTRACT_ADDRESS: any;
+  let VAULT_FACTORY_CONTRACT_ADDRESS: any;
+  let VAULT_CONTRACT_ADDRESS: any;
 
   // Init contract base instances
-  var nft_contract = web3.eth && new web3.eth.Contract(erc721Abi);
-  var settings_contract = web3.eth && new web3.eth.Contract(settingsAbi);
-  var vault_factory_contract = web3.eth && new web3.eth.Contract(vaultFactoryAbi);
-  var vault_contract = web3.eth && new web3.eth.Contract(vaultAbi);
+  let nft_contract = web3.eth && new web3.eth.Contract(erc721Abi);
+  let settings_contract = web3.eth && new web3.eth.Contract(settingsAbi);
+  let vault_factory_contract = web3.eth && new web3.eth.Contract(vaultFactoryAbi);
+  let vault_contract = web3.eth && new web3.eth.Contract(vaultAbi);
 
   // Init token id
-  var tokenId = 0;
+  let tokenId = 0;
 
   // Contract Deploy Payload
   const erc721Payload = {
@@ -60,6 +104,7 @@ const HomeBanner = () => {
     data: settingsBytecode,
   };
   const main = async () => {
+    let progress = [...createVaultProgress];
     // 1. Deploy NFT contract
     console.log('1. Deploy NFT contract');
     await nft_contract
@@ -69,7 +114,14 @@ const HomeBanner = () => {
         console.log('Deployed NFT Contract Transaction Hash :', receipt.transactionHash);
         console.log('Deployed NFT Contract Address : ', receipt.contractAddress);
         NFT_CONTRACT_ADDRESS = receipt.contractAddress;
+        progress[0].log = `Deployed NFT Contract Transaction Hash : , ${receipt.transactionHash} \n Deployed NFT Contract Address : ${receipt.contractAddress}`;
+        progress[0].status = 'done';
+        progress[1].status = 'active';
       });
+
+    
+    setCreateVaultProgress(cloneDeep(progress));
+
     // 2. Mint 01 NFT to your wallet
     console.log('2. Mint NFT to your wallet');
     nft_contract = web3 && new web3.eth.Contract(erc721Abi, NFT_CONTRACT_ADDRESS);
@@ -80,7 +132,12 @@ const HomeBanner = () => {
       .send(parameter)
       .on('receipt', (receipt) => {
         console.log('Mint Transaction Hash :', receipt.transactionHash);
+        progress[1].log = `Mint Transaction Hash :', ${receipt.transactionHash}`;
+        progress[1].status = 'done';
+        progress[2].status = 'active';
       });
+    setCreateVaultProgress(cloneDeep(progress));
+
     // 3. Deploy Setting Contract
     console.log('3. Deploy Setting Contract');
     await settings_contract
@@ -90,7 +147,13 @@ const HomeBanner = () => {
         console.log('Deployed Settings Contract Transaction Hash :', receipt.transactionHash);
         console.log('Deployed Settings Contract Address : ', receipt.contractAddress);
         SETTINGS_CONTRACT_ADDRESS = receipt.contractAddress;
+
+        progress[2].log = `Deployed Settings Contract Transaction Hash :', ${receipt.transactionHash} \n Deployed Settings Contract Address : ${receipt.contractAddress}`;
+        progress[2].status = 'done';
+        progress[3].status = 'active';
       });
+    setCreateVaultProgress(cloneDeep(progress));
+
     // 4. Deploy Vault Factory Contract
     console.log('4. Deploy Vault Factory Contract');
     const vaultFactoryPayload = {
@@ -104,7 +167,13 @@ const HomeBanner = () => {
         console.log('Deployed Vault Factory Contract Transaction Hash :', receipt.transactionHash);
         console.log('Deployed Vault Factory Contract Address : ', receipt.contractAddress);
         VAULT_FACTORY_CONTRACT_ADDRESS = receipt.contractAddress;
+
+        progress[3].log = `Deployed Vault Factory Contract Transaction Hash :', ${receipt.transactionHash} \n Deployed Vault Factory Contract Address : ${receipt.contractAddress}`;
+        progress[3].status = 'done';
+        progress[4].status = 'active';
       });
+    setCreateVaultProgress(cloneDeep(progress));
+
     // 5. Approve for Vault Factory Contract to use your NFTs
     console.log(' 5. Approve for Vault Factory Contract');
     let _to = VAULT_FACTORY_CONTRACT_ADDRESS;
@@ -114,7 +183,13 @@ const HomeBanner = () => {
       .send(parameter)
       .on('receipt', (receipt) => {
         console.log('Approve Transaction Hash :', receipt.transactionHash);
+
+        progress[4].log = `Approve Transaction Hash :', ${receipt.transactionHash}`;
+        progress[4].status = 'done';
+        progress[5].status = 'active';
       });
+    setCreateVaultProgress(cloneDeep(progress));
+
     // // 6. Fraction your approved NFT via mint() function of Vault Factory. Vault Factory will transfer your NFT to new minted Vault, then that VaultFactory will mint ERC20 tokens (NFT fractions) to your wallet
     console.log('6. Fraction your NFT via Vault Factory');
     vault_factory_contract = new web3.eth.Contract(vaultFactoryAbi, VAULT_FACTORY_CONTRACT_ADDRESS);
@@ -136,7 +211,14 @@ const HomeBanner = () => {
         console.log('SETTINGS_CONTRACT_ADDRESS', SETTINGS_CONTRACT_ADDRESS);
         console.log('VAULT_FACTORY_CONTRACT_ADDRESS', VAULT_FACTORY_CONTRACT_ADDRESS);
         console.log('VAULT_CONTRACT_ADDRESS', VAULT_CONTRACT_ADDRESS);
+
+        progress[5].log = `NFT_CONTRACT_ADDRESS :', ${NFT_CONTRACT_ADDRESS}
+        \n SETTINGS_CONTRACT_ADDRESS :', ${SETTINGS_CONTRACT_ADDRESS}
+        \n VAULT_FACTORY_CONTRACT_ADDRESS :', ${VAULT_FACTORY_CONTRACT_ADDRESS}
+        \n VAULT_CONTRACT_ADDRESS :', ${VAULT_CONTRACT_ADDRESS}`;
+        progress[5].status = 'done';
       });
+    setCreateVaultProgress(cloneDeep(progress));
     // // 7. Check wallet for NFT & ERC20 token
     nft_contract = new web3.eth.Contract(erc721Abi, NFT_CONTRACT_ADDRESS);
     vault_contract = new web3.eth.Contract(vaultAbi, VAULT_CONTRACT_ADDRESS);
@@ -147,37 +229,94 @@ const HomeBanner = () => {
     );
   };
 
-  return (
-    <div style={{ height: '650px' }} className='w-full flex sm:flex-row flex-wrap'>
-      <div className='sm:w-1/2 w-full flex flex-col items-center sm:items-start justify-center h-full sm:pr-6 '>
-        <div className='content pb-3'>
-          <h2 className='font-semibold text-4xl leadding-10 sm:text-banner sm:leading-banner'>
-            Discover a New <br></br> Era of NFTs
-          </h2>
-          <p className='py-8'>
-            DAO Platform is the primier marketplace for NFT, which are digital items you can truly own. Digital items
-            have existed for a long time, but never like this.
-          </p>
-        </div>
-        <div className='actions flex flex-row justify-start items-center'>
-          {!walletAddress && (
-            <button className='hidden sm:flex rounded-full h-10 bg-blue-500 hover:bg-blue-600 px-4 py-2 mr-3 text-white text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 flex-row justify-center items-center font-medium'>
-              <ConnectWallet />
-            </button>
-          )}
+  const handleStartCreatVault = () => {
+    setOpenCreateVaultModal(true);
+    main();
+  };
 
-          <button
-            onClick={main}
-            className='flex rounded-full h-10 bg-none border-2 border-blue-500 hover:bg-blue-500 px-4 py-2 hover:text-white text-blue-500 dark:bg-none dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 flex-row justify-center items-center font-medium'>
-            {/* Explore Live Vaults */}
-            Create Vault/NFT
-          </button>
+  return (
+    <>
+      <div style={{ height: '650px' }} className='w-full flex sm:flex-row flex-wrap'>
+        <div className='sm:w-1/2 w-full flex flex-col items-center sm:items-start justify-center h-full sm:pr-6 '>
+          <div className='content pb-3'>
+            <h2 className='font-semibold text-4xl leadding-10 sm:text-banner sm:leading-banner'>
+              Discover a New <br></br> Era of NFTs
+            </h2>
+            <p className='py-8'>
+              DAO Platform is the primier marketplace for NFT, which are digital items you can truly own. Digital items
+              have existed for a long time, but never like this.
+            </p>
+          </div>
+          <div className='actions flex flex-row justify-start items-center'>
+            {!walletAddress && (
+              <button className='hidden sm:flex rounded-full h-10 bg-blue-500 hover:bg-blue-600 px-4 py-2 mr-3 text-white text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 flex-row justify-center items-center font-medium'>
+                <ConnectWallet />
+              </button>
+            )}
+
+            {walletAddress && (
+              <button
+                onClick={handleStartCreatVault}
+                className='flex rounded-full h-10 bg-none border-2 border-blue-500 hover:bg-blue-500 px-4 py-2 hover:text-white text-blue-500 dark:bg-none dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 flex-row justify-center items-center font-medium'>
+                {/* Explore Live Vaults */}
+                Create Vault/NFT
+              </button>
+            )}
+          </div>
+        </div>
+        <div className='w-full sm:w-1/2 sm:flex flex-row items-center justify-center h-full hidden'>
+          <CustomSlider />
         </div>
       </div>
-      <div className='w-full sm:w-1/2 sm:flex flex-row items-center justify-center h-full hidden'>
-        <CustomSlider />
-      </div>
-    </div>
+
+      <Transition appear show={openCreateVaultModal} as={Fragment}>
+        <Dialog as='div' className='relative z-10' onClose={() => setOpenCreateVaultModal(false)}>
+          <Transition.Child
+            as={Fragment}
+            enter='ease-out duration-300'
+            enterFrom='opacity-0'
+            enterTo='opacity-100'
+            leave='ease-in duration-200'
+            leaveFrom='opacity-100'
+            leaveTo='opacity-0'>
+            <div className='fixed inset-0 bg-black bg-opacity-25' />
+          </Transition.Child>
+
+          <div className='fixed inset-0 overflow-y-auto'>
+            <div className='flex min-h-full items-center justify-center p-4 text-center'>
+              <Transition.Child
+                as={Fragment}
+                enter='ease-out duration-300'
+                enterFrom='opacity-0 scale-95'
+                enterTo='opacity-100 scale-100'
+                leave='ease-in duration-200'
+                leaveFrom='opacity-100 scale-100'
+                leaveTo='opacity-0 scale-95'>
+                <Dialog.Panel className='w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                  <Dialog.Title as='h3' className='text-3xl font-bold leading-6 text-gray-900'>
+                    Demo Create NFT and Vault
+                  </Dialog.Title>
+                  <div className='mt-6'>
+                    <p className='text-base font-medium text-gray-900'>
+                      Demonstate step by step from minting a NFT to create a Vault.
+                    </p>
+                  </div>
+
+                  <div className='my-8'>
+                    {createVaultProgress.map((progress, i) => (
+                      <div key={i} className={`bo-step-${progress.status}`}>
+                        <span>{`STEP ${progress.step}: ${progress.title}`}</span>
+                        <span className='text-sm'>{progress.log}</span>
+                      </div>
+                    ))}
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+    </>
   );
 };
 
