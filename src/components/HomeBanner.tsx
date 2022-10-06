@@ -58,6 +58,13 @@ const HomeBanner = () => {
       status: 'todo',
       log: null,
     },
+    {
+      step: 7,
+      title:
+        'Check wallet for NFT & ERC20 token',
+      status: 'todo',
+      log: null,
+    },
   ]);
 
   // Choose 1 of 3
@@ -217,16 +224,24 @@ const HomeBanner = () => {
         \n VAULT_FACTORY_CONTRACT_ADDRESS : ${VAULT_FACTORY_CONTRACT_ADDRESS}
         \n VAULT_CONTRACT_ADDRESS : ${VAULT_CONTRACT_ADDRESS}`;
         progress[5].status = 'done';
+        progress[6].status = 'active';
       });
     setCreateVaultProgress(cloneDeep(progress));
     // // 7. Check wallet for NFT & ERC20 token
     nft_contract = new web3.eth.Contract(erc721Abi, NFT_CONTRACT_ADDRESS);
     vault_contract = new web3.eth.Contract(vaultAbi, VAULT_CONTRACT_ADDRESS);
-    console.log('NFT token balance of wallet: ', await nft_contract.methods.balanceOf(web3.eth.defaultAccount).call());
+
+    const nft_token_wallet_balance = await nft_contract.methods.balanceOf(web3.eth.defaultAccount).call();
+    const erc20_fraction_token_wallet_balance = await vault_contract.methods.balanceOf(web3.eth.defaultAccount).call();
+    console.log('NFT token balance of wallet: ', nft_token_wallet_balance);
     console.log(
       'ERC20 Fractions token balance of wallet: ',
-      await vault_contract.methods.balanceOf(web3.eth.defaultAccount).call()
+      erc20_fraction_token_wallet_balance
     );
+    progress[6].log = `NFT token balance of wallet: ${nft_token_wallet_balance}
+    \n ERC20 Fractions token balance of wallet: ${erc20_fraction_token_wallet_balance}`
+    progress[6].status = 'done';
+    setCreateVaultProgress(cloneDeep(progress));
   };
 
   const handleStartCreatVault = () => {
@@ -305,6 +320,7 @@ const HomeBanner = () => {
                   <div className='my-8'>
                     {createVaultProgress.map((progress, i) => (
                       <div key={i} className={`bo-step-${progress.status} flex flex-col`}>
+                        <span className='spinner-grow'></span>
                         <span>{`STEP ${progress.step}: ${progress.title}`}</span>
                         <span className='text-xs'>{progress.log}</span>
                       </div>
