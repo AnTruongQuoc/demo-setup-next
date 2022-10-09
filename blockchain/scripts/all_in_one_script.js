@@ -7,7 +7,7 @@ const { settingsAbi } = require('../abi/settingsAbi');
 const { settingsBytecode } = require('../bytecode/settingsBytecode');
 const { vaultFactoryAbi } = require('../abi/vaultFactoryAbi');
 const { vaultFactoryBytecode } = require('../bytecode/vaultFactoryBytecode');
-const { vaultAbi_transfer } = require('../abi/event/vaultAbi_transfer');
+// const { vaultAbi_transfer } = require('../abi/event/vaultAbi_transfer');
 const { vaultAbi } = require('../abi/vaultAbi');
 
 const Web3 = require('web3');
@@ -117,7 +117,7 @@ async function main() {
   let _symbol = 'BET'; // string;
   let _token = NFT_CONTRACT_ADDRESS; // address;
   let _mintTokenId = tokenId; // uint256;
-  let _supply = '12345678900000'; // uint256;
+  let _supply = '1000000000000000000000'; // uint256;
   let _listPrice = '98765432100000'; // uint256;
   let _fee = '56473829100000'; // uint256;
   await vault_factory_contract.methods
@@ -140,6 +140,9 @@ async function main() {
     'ERC20 Fractions token balance of wallet: ',
     await vault_contract.methods.balanceOf(web3.eth.defaultAccount).call()
   );
+  console.log('Vault Name: ', await vault_contract.methods.name().call());
+
+  console.log('Token Symbol: ', await vault_contract.methods.symbol().call());
 }
 
 main();
